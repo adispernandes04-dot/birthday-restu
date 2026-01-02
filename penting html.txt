@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Happy Birthday My Love 🎂</title>
+  <style>
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Comic Sans MS', 'Segoe UI', sans-serif;
+      background: linear-gradient(135deg, #ffdde1, #ee9ca7);
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      min-height: 100vh;
+      padding: 40px 0;
+      color: #fff;
+      text-align: center;
+      overflow-y: auto;
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.2);
+      padding: 40px;
+      border-radius: 25px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+      max-width: 520px;
+      width: 90%;
+      backdrop-filter: blur(10px);
+      animation: float 4s ease-in-out infinite;
+      margin-bottom: 120px;
+    }
+    @keyframes float { 0%,100%{transform:translateY(0);} 50%{transform:translateY(-10px);} }
+    h1 { font-size: 2.6em; margin-bottom: 5px; }
+    h2 { font-size: 1.2em; margin-bottom: 20px; font-weight: normal; }
+    p { font-size: 1.1em; line-height: 1.7; }
+    .heart { font-size: 3.5em; animation: beat 1s infinite; }
+    @keyframes beat { 0%,100%{transform:scale(1);} 50%{transform:scale(1.3);} }
+    .love-btn {
+      margin-top: 15px;
+      padding: 12px 25px;
+      font-size: 1.05em;
+      border: none;
+      border-radius: 30px;
+      background: #ff5f9e;
+      color: white;
+      cursor: pointer;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.25);
+      transition: transform 0.2s, background 0.3s;
+    }
+    .love-btn:hover { background: #ff2f7d; transform: scale(1.1); }
+    .slideshow img { width:100%; border-radius:15px; margin-bottom:15px; display:none; }
+    .footer { margin-top: 25px; font-style: italic; }
+    .balloon { position: absolute; bottom: -100px; font-size: 2.5em; animation: rise 8s linear infinite; }
+    @keyframes rise { 0%{transform:translateY(0);opacity:1;} 100%{transform:translateY(-120vh);opacity:0;} }
+  </style>
+</head>
+<body>
+
+<audio id="bgMusic" loop>
+  <source src="romantic.mp3" type="audio/mpeg">
+</audio>
+
+<div style="position:fixed; top:10px;">
+  <button class="love-btn" onclick="playMusic()">🎵 Play</button>
+  <button class="love-btn" onclick="pauseMusic()">⏸ Pause</button>
+</div>
+
+<div class="balloon" style="left:10%">🎈</div>
+<div class="balloon" style="left:30%;animation-delay:2s">🎈</div>
+<div class="balloon" style="left:50%;animation-delay:4s">🎈</div>
+<div class="balloon" style="left:70%;animation-delay:1s">🎈</div>
+<div class="balloon" style="left:90%;animation-delay:3s">🎈</div>
+
+<div class="card">
+  <div class="slideshow">
+    <img src="foto1.jpg" class="slide" style="display:block">
+    <img src="foto2.jpg" class="slide">
+    <img src="foto3.jpg" class="slide">
+  </div>
+  <div class="heart">💖</div>
+  <h1>Happy Birthday</h1>
+  <h2>🎂 Restu 🎂<br>📅 3 Januari 2002</h2>
+  <p>
+    Today is a very special day, because the most amazing person in my life was born.
+    Thank you for your love, your smile, and your patience.
+  </p>
+  <p>
+    May happiness always surround you,
+    and may I always be the one holding your hand.
+  </p>
+
+  <button class="love-btn" onclick="showLove()">💗 I Love You 💗</button>
+  <button class="love-btn" onclick="openLetter()">💌 Open Love Letter</button>
+  <div id="loveMessage" style="display:none; margin-top:15px;">I love you more every single day 💖</div>
+
+  <div id="letterModal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.6); display:flex; justify-content:center; align-items:center;">
+    <div style="background:#fff; color:#333; padding:30px; border-radius:20px; max-width:400px;">
+      <h2>💌 My Love Letter</h2>
+      <p>
+        My love,<br><br>
+        Meeting you was the best thing in my life.
+        Thank you for being my happiness, my comfort, and my home.
+        <br><br>
+        I promise to love you today, tomorrow, and forever.
+      </p>
+      <button class="love-btn" onclick="closeLetter()">Close 💕</button>
+    </div>
+  </div>
+
+  <div class="footer">With all my love,<br><strong>Adistia</strong> 💕</div>
+</div>
+
+<script>
+  let index = 0;
+  const slides = document.querySelectorAll('.slide');
+  setInterval(() => {
+    slides.forEach(s => s.style.display = 'none');
+    slides[index].style.display = 'block';
+    index = (index + 1) % slides.length;
+  }, 2500);
+
+  function playMusic() {
+    const m = document.getElementById('bgMusic');
+    m.volume = 0.4;
+    m.play();
+  }
+  function pauseMusic() { document.getElementById('bgMusic').pause(); }
+
+  function showLove() {
+    const msg = document.getElementById('loveMessage');
+    msg.style.display = 'block';
+    for (let i = 0; i < 25; i++) {
+      const h = document.createElement('div');
+      h.innerHTML = '💗';
+      h.style.position = 'fixed';
+      h.style.left = Math.random()*100 + 'vw';
+      h.style.top = '100vh';
+      h.style.fontSize = '24px';
+      h.style.animation = 'fly 3s linear';
+      document.body.appendChild(h);
+      setTimeout(()=>h.remove(),3000);
+    }
+  }
+
+  function openLetter() { pauseMusic(); document.getElementById('letterModal').style.display='flex'; }
+  function closeLetter() { document.getElementById('letterModal').style.display='none'; playMusic(); }
+</script>
+
+<style>
+@keyframes fly { from{transform:translateY(0);opacity:1;} to{transform:translateY(-120vh);opacity:0;} }
+</style>
+
+</body>
+</html>
